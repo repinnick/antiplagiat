@@ -9,33 +9,49 @@ bool isSeparator(char c);
 string textWithoutSeparators(string text);
 
 int findWords(string text, string textForFind);
+void splitToThree(string twfc, string txt);
 
 int main()
 {
-    string text = "Children start school at the age of five, but there is some free nursery-school education before that age. The state nursery schools are not for all. They are for some families, for example for families with only one parent. In most areas there are private nursery schools. Parents who want their children to go to nursery school pay for their children under 5 years old to go to these private nursery schools";
+    string text = "test1 test2 test3 test4 test5 test6 test7 test8 test9";
     string redactText = textWithoutSeparators(text);
 
-    string otherRedactText = textWithoutSeparators("Children are start school at the age of 5, but there are some free nursery-school education before that age. The state nursery school is not for all. Happy are for some families, for examples for family with only one parent.");
+    string otherRedactText = textWithoutSeparators("test2 test3 test4 test5 test6");
 
     string threeWordsForCheck;
 
     string word;
-    int iw = 0;
-    int equals = 0, procent = 0;
     
-    for (int i = 0; i < text.size(); i++){
-    	if (redactText[i] == text[i]){
-    		equals++;
-    	}
-    }
+    int count = 0;
     
-	procent = text.size() / equals;
+    
+	splitToThree(threeWordsForCheck, otherRedactText);
 	
-	cout << procent << endl;
+	
+	cout << findWords(redactText, otherRedactText);
 
-    cout << findWords(redactText, "nursery schools");
 
     return 0;
+}
+
+void splitToThree(string twfc, string txt)
+{
+	int count = 0;
+    
+	for (int i = 0; i < txt.size(); i++){
+		if (txt[i] == ' '){
+			count++;
+		}
+	  	if (count < 3){
+			twfc[i] = txt[i];
+			//cout << threeWordsForCheck[i];
+		}
+		else{
+			//cout << endl;
+			count = 0;
+		}
+		
+	}	
 }
 
 bool isSeparator(char c)
@@ -72,5 +88,3 @@ int findWords(string text, string textForFind)
     }
     return -1;
 }
-
-

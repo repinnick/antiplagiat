@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <cstring>
 
 using namespace std;
 
@@ -8,22 +9,44 @@ bool isSeparator(char c);
 string textWithoutSeparators(string text);
 
 int findWords(string text, string textForFind);
+void splitToThree(string &twfc, string &delWord, string txt);
 
 int main()
 {
-    string text = "Children start school at the age of five, but there is some free nursery-school education before that age. The state nursery schools are not for all. They are for some families, for example for families with only one parent. In most areas there are private nursery schools. Parents who want their children to go to nursery school pay for their children under 5 years old to go to these private nursery schools";
-    string redactText = textWithoutSeparators(text);
+    string text = "test1 test2 test3 test4 test5 test6 test7 test8 test9";
+    string documentText = textWithoutSeparators(text);
 
-    string otherRedactText = textWithoutSeparators("Children are start school at the age of 5, but there are some free nursery-school education before that age. The state nursery school is not for all. Happy are for some families, for examples for family with only one parent.");
+    string userText = textWithoutSeparators("test2 test3 test4 test5 test6");
 
-    string threeWordsForCheck;
+    string threeWordsForCheck = "";
+    string delWord = "";
 
-    string word;
-    int iw = 0;
 
-    cout << findWords(redactText, "nursery schools");
+    splitToThree(threeWordsForCheck, delWord, userText);
+    int size = findWords(userText, delWord);
+    userText.replace(0, size + 1, "");
+    cout << userText << endl;
+
 
     return 0;
+}
+
+void splitToThree(string &twfc, string &delWord, string txt)
+{
+    twfc = "";
+    delWord = "";
+    int count = 0;
+
+    for (int i = 0; i < txt.size() - txt.size() % 3; i++){
+        if (txt[i] == ' ')
+            count++;
+        if (count < 1)
+            delWord += txt[i];
+        if (count < 3)
+            twfc += txt[i];
+        else
+            break;
+    }
 }
 
 bool isSeparator(char c)
@@ -48,13 +71,12 @@ string textWithoutSeparators(string text)
 
 int findWords(string text, string textForFind)
 {
-
     int j = 0;
     for (int i = 0; i < text.size(); i++){
         if (text[i] == textForFind[j])
             j++;
         else if (j == textForFind.size())
-            return j;
+            return i;
         else
             j = 0;
     }

@@ -69,7 +69,7 @@ int wordCounter(string userText)
     int counter = 0;
 
     for (int i = 0; i <= userText.size(); i++)
-        if (userText[i] == ' ' or i + 1 == userText.size())
+        if (userText[i] == ' ' or i == userText.size())
             counter++;
 
     return counter;

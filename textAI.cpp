@@ -16,7 +16,7 @@ int plagiatDetector(int size, int coincidences);
 int main()
 {
     string documentText = textWithoutSeparators("test1 test2 test3 test4 test5 test6 test7 test8 test9");
-    string userText = textWithoutSeparators("test2 teñt3 test4 test456 test4");
+    string userText = textWithoutSeparators("test2 test3 test4 test5 test5");
 
     const int arraySize = wordCounter(userText);
     string words[arraySize] = {};

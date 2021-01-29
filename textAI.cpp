@@ -1,7 +1,5 @@
 #include <iostream>
 #include <string>
-#include <cctype>
-#include <cstring>
 
 #define SELECTION_WORDS 3 //the number of words for selection (may be changed)
 

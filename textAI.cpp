@@ -3,18 +3,18 @@
 #include <cctype>
 #include <cstring>
 
-#define SELECTION_WORDS 3
+#define SELECTION_WORDS 3 //the number of words for selection (may be changed)
 
 using namespace std;
 
-bool isSeparator(char c);
-string textWithoutSeparators(string text);
-int findWords(string text, string textForFind);
-int wordCounter(string userText);
-void addWordsInArray(string userText, string words[]);
-int checkWordsInText(int size, string words[], string documentText);
-int plagiatDetector(int size, int coincidences);
-int sumOfNotSelection();
+bool isSeparator(char c); // check punctuation marks
+string textWithoutSeparators(string text); // text formatting (lower case, no punctuation marks)
+int findWords(string text, string textForFind); // search for words that match the main text
+int wordCounter(string userText); // counter for array size
+void addWordsInArray(string userText, string words[]); // add all words at array
+int checkWordsInText(int size, string words[], string documentText); // takes words from array and checks it in main text
+int plagiatDetector(int size, int coincidences); // checks percent of plagiat
+int sumOfNotSelection(); // counting words that participate in the sample least of all
 
 int main()
 {

@@ -3,6 +3,8 @@
 #include <cctype>
 #include <cstring>
 
+#define SELECTION_WORDS 3
+
 using namespace std;
 
 bool isSeparator(char c);
@@ -12,11 +14,12 @@ int wordCounter(string userText);
 void addWordsInArray(string userText, string words[]);
 int checkWordsInText(int size, string words[], string documentText);
 int plagiatDetector(int size, int coincidences);
+int sumOfNotSelection();
 
 int main()
 {
-    string documentText = textWithoutSeparators("test1 test2 test3 test4 test5 test6 test7 test8 test9");
-    string userText = textWithoutSeparators("test2 test3 test4 test5 test5");
+    string documentText = textWithoutSeparators("Baseball became popular in Japan after American soldiers introduced it during the occupation following World War II. In the 1990s a Japanese player, Hideo Nomo, became a star pitcher for the Los Angeles Dodgers. Baseball is also widely played in Cuba and other Caribbean nations. In the 1996 Olympics, it was a measure of baseball’s appeal outside the United States that the contest for the gold medal was down to Japan and Cuba (Cuba won).");
+    string userText = textWithoutSeparators("Baseball become popular in Japan ofter American soldiers introduct it during the occupation following World War second. In the 1990s a Japanese player, Hideo Nomo, became a star pitcher for the Los Angeles Dodgers");
 
     const int arraySize = wordCounter(userText);
     string words[arraySize] = {};
@@ -57,7 +60,7 @@ int findWords(string text, string textForFind)
         if (text[i] == textForFind[j])
             j++;
         else if (j == textForFind.size())
-            return 3;
+            return SELECTION_WORDS;
         else
             j = 0;
     }
@@ -94,10 +97,17 @@ int checkWordsInText(int size, string words[], string documentText)
 {
     string threeWordsForCheck = "";
     int counter = 0;
-    for (int i = 0; i < size - 2; i++){
-        threeWordsForCheck += (words[i] + " ");
-        threeWordsForCheck += (words[i + 1] + " ");
-        threeWordsForCheck += words[i + 2];
+    int finish = SELECTION_WORDS - 1;
+
+    for (int i = 0; i < size - finish; i++){
+        int wCount = 0;
+        while (wCount < SELECTION_WORDS){
+            if (wCount == SELECTION_WORDS - 1)
+                threeWordsForCheck += (words[i + wCount]);
+            else threeWordsForCheck += (words[i + wCount] + " ");
+
+            wCount++;
+        }
         counter += findWords(documentText, threeWordsForCheck);
         threeWordsForCheck = "";
     }
@@ -106,6 +116,14 @@ int checkWordsInText(int size, string words[], string documentText)
 
 int plagiatDetector(int size, int coincidences)
 {
-    int common = size * 3 - 6;
+    int common = (size * SELECTION_WORDS) - (2 * sumOfNotSelection());
     return (coincidences * 100) / common;
+}
+
+int sumOfNotSelection(){
+    int sum = 0;
+    for (int i = 0; i < SELECTION_WORDS; i++){
+        sum += i;
+    }
+    return sum;
 }

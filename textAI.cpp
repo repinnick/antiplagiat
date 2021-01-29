@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cctype>
+#include <cstring>
 
 #define SELECTION_WORDS 3 //the number of words for selection (may be changed)
 
@@ -33,7 +35,7 @@ int main()
 
 bool isSeparator(char c)
 {
-    char s[] = ",.!;?:-+";
+    char s[] = ",.!;?:-+\"`'/\\%#^@&$*()}{][|~=";
     for (int i = 0; s[i] != '\0'; i++)
         if (c == s[i])
             return true;

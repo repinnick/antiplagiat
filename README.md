@@ -66,7 +66,7 @@ Final functions of the program, which allow to determine the uniqueness of the t
 <b>The project was made by:</b>
 <ul>
     <li>
-    </u><code>Mikalai Repin</code><br>
+    <code>Mikalai Repin</code><br>
     <a href="mailto:mikalai.repin@gmail.com">mikalai.repin@gmail.com</a>
     </li>
     <li>

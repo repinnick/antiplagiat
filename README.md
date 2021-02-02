@@ -1,61 +1,63 @@
 ## [textAI.cpp](https://github.com/repinnick/antiplagiat/blob/main/textAI.cpp)
 
-<b>textAI</b> - программа, которая сопостовляет исходный текст с тестовым фрагментом (фрагментом текста, введённого пользователем). За основу взята такая система определения плагиата: 
+<b>textAI</b> is a program that compares the original text with a test fragment (a fragment of text entered by the user). The basis is taken such a system for determining plagiarism: 
 <ul>
-<li>сначала выделяем <code>1, 2, 3</code> слова из фрагмента текста, введённого пользователем, и проверяем есть ли такая последовательность слов в исходном тексте;</li>
-<li>затем выделяем <code>2, 3, 4</code> слова и снова ищем их в тексте и т.д.</li>
-<li>после полного анализа текста таким способом, мы посчитаем процент совпадающих выборок и сделаем вывод об уникальности текста.</li>
+<li>first, we select <code>1, 2, 3</code> words from a fragment of the text, the entered by user, and check if there is such a sequence of words in the original text;</li>
+<li>then select <code>2, 3, 4</code> words and again look for them in the text and etc.;</li>
+<li>after a complete analysis of the text we will calculate the percentage of matching selections and draw a conclusion about the uniqueness of the text.</li>
 </ul>
 
 ```c++
 #define SELECTION_WORDS 3
 
-// устанавливает значение слов в выборке;
-// значние может быть целым положительным числом не меньше 2-ух (иначе выборка бессмысленна);
-// значение по умолчанию - 3;
+// sets the meaning of words in the selection;
+// the value can be a positive integer no less than 2 (otherwise the selection is meaningless);
+// default value is 3;
 ```
 
 ```c++
-//в переменные
+//into variables
 string documentText;
 string userText;
-// передается отформатированный исходный текст и текст пользователя соответсвенно;
+// formatted original text and user text are transmitted, respectively;
 ```
 <hr>
+Text formatting (removing punctuation marks and converting text to lowercase) performs the function:
 
-Форматирование текста (удаление знаков препинания и приведение текста к нижнему регистру) осуществляет функция:
 ```c++
 string textWithoutSeparators(string text);
 ```
-В ней вызывается функция  ```bool isSeparator(char c)```, которая занимается поиском знаков препинания в исходном тексте и в тексте пользователя. На выходе мы получаем новую отформатированную строку.
+
+It calls the ```bool isSeparator(char c)``` function, which searches for punctuation marks in the original text and in the user's text. The output is a new formatted string.
 <hr>
 
-Далее с помощью функции 
+Then, using the function
 ```c++
 int wordCounter(string userText);
 ```
-программа считает количество слов в тексте пользователя. Возвращает количество слов, которое мы записываем в переменную ```int arraySize```. Данная переменная будет выступать в качестве размера будущего массива.
+the program counts the number of words in the user's text. Returns the number of words that we write to the variable ```int arraySize```. This variable will act as the size of the future array.
 <hr>
 
 ```c++
 void addWordsInArray(string userText, string words[]);
 ```
-Данная функция наполняет статический массив ```string words[arraySize] = {};``` словами из текста пользователя.
+
+This function fills the static array ```string words[arraySize] = {};``` with words from the user's text.
 <hr>
 
 ```c++
 int checkWordsInText(int size, string words[], string documentText);
 ```
-<b><i>Самая важная часть программы</i></b>. Здесь идёт разбивка массива на три элемента, соединение трёх слов в строку и проверка их функцией ```findWords()```.
+<b><i>The most important part of the program.</i></b> Here is the breakdown of the array into three elements, the concatenation of three words into a string and the check of the selected string with the function ```findWords()```.
 
 ```c++
 int findWords(string text, string textForFind);
 ```
-Функция принимает на вход исходный текст и фрагмент текста из функции ```int checkWordsInText()```, и делает проверку на совпадение фрагмента текста с исходным текстом.
+The function takes as input the original text and a fragment of text from the function ```int checkWordsInText()```, and checks for the coincidence of the fragment of text with the original text.
 <hr>
 
 ```c++
 int plagiatDetector(int size, int coincidences);
 int sumOfNotSelection();
 ```
-Финальные функции программы, которые позволяют определить уникальность текста. Делается подсчёт возможных выборок, и методом пропорции функция высчитывает процент плагиата.
+Final functions of the program, which allow to determine the uniqueness of the text. Selections are counted, and using the proportion method, the function calculates the percentage of plagiarism.

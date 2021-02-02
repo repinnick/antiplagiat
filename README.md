@@ -2,9 +2,9 @@
 
 <b>textAI</b> is a program that compares the original text with a test fragment (a fragment of text entered by the user). The basis is taken such a system for determining plagiarism: 
 <ul>
-<li>first, we select <code>1, 2, 3</code> words from a fragment of the text, the entered by user, and check if there is such a sequence of words in the original text;</li>
-<li>then select <code>2, 3, 4</code> words and again look for them in the text and etc.;</li>
-<li>after a complete analysis of the text we will calculate the percentage of matching selections and draw a conclusion about the uniqueness of the text.</li>
+    <li>first, we select <code>1, 2, 3</code> words from a fragment of the text, the entered by user, and check if there is such a sequence of words in the original text;</li>
+    <li>then select <code>2, 3, 4</code> words and again look for them in the text and etc.;</li>
+    <li>after a complete analysis of the text we will calculate the percentage of matching selections and draw a conclusion about the uniqueness of the text.</li>
 </ul>
 
 ```c++
@@ -61,3 +61,18 @@ int plagiatDetector(int size, int coincidences);
 int sumOfNotSelection();
 ```
 Final functions of the program, which allow to determine the uniqueness of the text. Selections are counted, and using the proportion method, the function calculates the percentage of plagiarism.
+<hr>
+
+<b>The project was made by:</b>
+<ul>
+    <li>
+    </u><code>Mikalai Repin</code><br>
+    <a href="mailto:mikalai.repin@gmail.com">mikalai.repin@gmail.com</a>
+    </li>
+    <li>
+    <code>Artur Kutas</code><br>
+    <a href="mailto:artur.kytas@gmail.com">artur.kytas@gmail.com</a>
+    </li>
+</ul>
+
+<hr>

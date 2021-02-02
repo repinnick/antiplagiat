@@ -118,7 +118,8 @@ int plagiatDetector(int size, int coincidences)
     return (coincidences * 100) / common;
 }
 
-int sumOfNotSelection(){
+int sumOfNotSelection()
+{
     int sum = 0;
     for (int i = 0; i < SELECTION_WORDS; i++){
         sum += i;
